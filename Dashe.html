@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="style.css">
-<style>
-
-</style>
 </head>
-<body>
+<style>
+html{overflow: hidden;}
+</style>
+<body >
 
 <div class="sidebar">
     <a class="active" href="#">Editar</a>
@@ -17,15 +17,72 @@
     <a href="#">Ajuda</a>
 </div>
 
-<div class="content">
-	<div class="icon_user " style="position: fixed;">
-		<img src="user.png" alt="user" class="rounded-circle rounded float-left" width="48"style="position: relative;right: -2240%;border:none;top:10px;">
+<div class="content" >
+	
+	<div class="icon_user ">
+		<header >
+			<nav class="navbar navbar-light " style="position: relative;left: 73%;">
+				<form class="form-inline">
+					<button type="button" class="btn btn-primary">
+						Notificação <span class="badge badge-light">4</span>
+					</button>					</button><img src="user.png" width="40" style="margin-left: 10px;">  <font style="text-indent: 10px;">Olá, Samuel</font>
+				</form>
+		    </nav>
+		</header>
 	</div>
-  	<div class="form" style="position: relative;top: 20%">
-  		
+  	<div class="form" style="position: relative;top: 10%" id="app">
+  		<form class="container" style="width: 100%;position: absolute;">
+  			<div class="form-group ">
+  				<label for="exampleFormControlFile1"><h1>Selecionar arquivo</h1></label>
+  				<input  type="file" class="form-control-file btn btn-outline-success" id="exampleFormControlFile1" align="center">
+  			</div>
+  			<select class="custom-select-lg" style="margin-top: 10px;">
+  				<option selected>Qual tipo de folha</option>
+  				<option value="1">Folha A4</option>
+			    <option value="2">Folha A3</option>
+			    <option value="3">Folha A4(Adesiva)</option>
+			</select>
+		</br>
+			<div class="custom-control custom-radio custom-control-inline custom-select-lg" style="margin-top: 10px;">
+				<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
+				<label class="custom-control-label" for="customRadioInline1">Preto</label>
+			</div>
+			<div class="custom-control custom-radio custom-control-inline custom-select-lg" >
+			  <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+			  <label class="custom-control-label" for="customRadioInline2">Branco</label>
+			</div>
+			<div style="margin-top: 10px;">
+				<label style="display: block;"><h1>Quantidades de folha</h1></label>
+				<button class="btn btn-success" @click="qtdFolhas('-')"> Reduzir </button>
+				<button class="btn btn-success" @click="qtdFolhas('+')">Adicionar </button>
+				<h4>Total de folhas {{qtd}}</h4>
+			</div>
+			<input type="submit" name="enviar" for="enviar" value="enviar" class="btn btn-success">
+  		</form>
   	</div>
-  	
-</div>
 
 </body>
+<script src="jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="vue.js"></script>
+<script>
+	let app = new Vue({
+		el:'#app',
+		data:{
+			qtd:0,
+
+		},
+		methods:{
+		   qtdFolhas(folhasQuantidade){
+		   	 this.qtd = (folhasQuantidade === '-')?this.qtd - 1:this.qtd + 1
+
+		   	 if (this.qtd >= 10){
+		   	 	this.qtd = 0
+		   	 }else if(this.qtd <= 0){
+		   	 	this.qtd = 10
+		   	 }
+		   }			
+		}
+	})
+</script>
 </html>
